@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button, ButtonProps } from "./ui/button";
-import { CopyCheck, CopyIcon, CopyX } from "lucide-react";
+import { useState } from 'react';
+import { Button, ButtonProps } from './ui/button';
+import { CopyCheck, CopyIcon, CopyX } from 'lucide-react';
 
-type CopyState = "idle" | "copied" | "error";
+type CopyState = 'idle' | 'copied' | 'error';
 
 export function CopyEventButton({
   eventId,
   clerkUserId,
   ...buttonProps
-}: Omit<ButtonProps, "children" | "onClick"> & {
+}: Omit<ButtonProps, 'children' | 'onClick'> & {
   eventId: string;
   clerkUserId: string;
 }) {
-  const [copyState, setCopyState] = useState<CopyState>("idle");
+  const [copyState, setCopyState] = useState<CopyState>('idle');
   const CopyIcon = getCopyIcon(copyState);
 
   return (
@@ -24,11 +24,12 @@ export function CopyEventButton({
         navigator.clipboard
           .writeText(`${location.origin}/book/${clerkUserId}/${eventId}`)
           .then(() => {
-            setCopyState("copied");
-            setTimeout(() => setCopyState("idle"), 2000);
-          }).catch(() => {
-            setCopyState("error");
-            setTimeout(() => setCopyState("idle"), 2000);
+            setCopyState('copied');
+            setTimeout(() => setCopyState('idle'), 2000);
+          })
+          .catch(() => {
+            setCopyState('error');
+            setTimeout(() => setCopyState('idle'), 2000);
           });
       }}
     >
@@ -40,22 +41,22 @@ export function CopyEventButton({
 
 function getCopyIcon(copyState: CopyState) {
   switch (copyState) {
-    case "idle":
+    case 'idle':
       return CopyIcon;
-    case "copied":
+    case 'copied':
       return CopyCheck;
-    case "error":
+    case 'error':
       return CopyX;
   }
 }
 
 function getChildren(copyState: CopyState) {
   switch (copyState) {
-    case "idle":
-      return "Copy link";
-    case "copied":
-      return "Copied!";
-    case "error":
-      return "Error";
+    case 'idle':
+      return 'Copy link';
+    case 'copied':
+      return 'Copied!';
+    case 'error':
+      return 'Error';
   }
 }

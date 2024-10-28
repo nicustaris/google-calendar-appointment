@@ -1,5 +1,5 @@
-import { CopyEventButton } from "@/components/CopyEventButton";
-import { Button } from "@/components/ui/button";
+import { CopyEventButton } from '@/components/CopyEventButton';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -7,13 +7,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { db } from "@/drizzle/db";
-import { formatEventDescription } from "@/lib/formatters";
-import { cn } from "@/lib/utils";
-import { auth } from "@clerk/nextjs/server";
-import { CalendarPlus, CalendarRange } from "lucide-react";
-import Link from "next/link";
+} from '@/components/ui/card';
+import { db } from '@/drizzle/db';
+import { formatEventDescription } from '@/lib/formatters';
+import { cn } from '@/lib/utils';
+import { auth } from '@clerk/nextjs/server';
+import { CalendarPlus, CalendarRange } from 'lucide-react';
+import Link from 'next/link';
+
+export const revalidate = 0;
 
 export default async function EventsPage() {
   const { userId, redirectToSignIn } = auth();
@@ -70,7 +72,7 @@ type EventCardProps = {
   clerkUserId: string;
 };
 
-function EventCard({
+export function EventCard({
   id,
   isActive,
   name,
@@ -79,15 +81,15 @@ function EventCard({
   clerkUserId,
 }: EventCardProps) {
   return (
-    <Card className={cn("flex flex-col", !isActive && "border-secondary/50")}>
-      <CardHeader className={cn(!isActive && "opacity-50")}>
+    <Card className={cn('flex flex-col', !isActive && 'border-secondary/50')}>
+      <CardHeader className={cn(!isActive && 'opacity-50')}>
         <CardTitle>{name}</CardTitle>
         <CardDescription>
           {formatEventDescription(durationInMinutes)}
         </CardDescription>
       </CardHeader>
       {description != null && (
-        <CardContent className={cn(!isActive && "opacity-50")}>
+        <CardContent className={cn(!isActive && 'opacity-50')}>
           {description}
         </CardContent>
       )}

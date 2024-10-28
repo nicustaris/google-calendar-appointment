@@ -1,0 +1,4 @@
+{
+  "path-intellisense.extensionOnImport": true,
+  "editor.foldingImportsByDefault": false
+}
